@@ -19,8 +19,8 @@ export default {
         GRAY_7: '#FAFAFA',
     },
     FONTS: {
-        REGULAR: 'Roboto-Regular',
-        BOLD: 'Roboto-Bold',
+        REGULAR: 'Nunito_400Regular',
+        BOLD: 'Nunito_700Bold',
     },
     SIZES: {
         SM: 14,
