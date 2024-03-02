@@ -5,16 +5,17 @@ import CardDetail from '@components/cardDetail';
 import Header from '@components/header';
 import { Plus } from 'phosphor-react-native';
 import SnackLine from '@components/snackLine';
-import SnackCard from '@components/snackCard';
 import { Snack } from '@models/snack';
 import { useFocusEffect } from '@react-navigation/native';
 import { useCallback, useState } from 'react';
 import { SnackGroup } from '@models/snackGroup';
 import { GetAllSnack } from '@data/snack/getAllSnack';
-import { FlatList, TouchableOpacity } from 'react-native';
+import { FlatList } from 'react-native';
 import { CreateSnack } from '@data/snack/createSnack';
-import { removeAllSnack } from '@data/snack/removeAllSnack';
 import uuid from 'react-native-uuid';
+import SnackGroupTitle from '@components/snackGroupTitle';
+import ListEmpty from '@components/listEmpyt';
+import { removeAllSnack } from '@data/snack/removeAllSnack';
 
 export function Home() {
 
@@ -27,7 +28,7 @@ export function Home() {
             const snack: Snack = {
                 id: uuid.v4(),
                 name: "Teste",
-                time: "4:00",
+                time: "03:00",
                 isDiety: false,
                 date: "2022-10-09",
                 description: "Teste"
@@ -67,14 +68,13 @@ export function Home() {
 
             <Button TitleText="Nova Refeicao" IconComponent={Plus} onPress={handleAddSnack} />
         
-            {/* <SnackCard snacks={snacks} /> */}
             <FlatList
                 data={snacks}
                 keyExtractor={(item) => item.date}
-                ListEmptyComponent={() => <Title>Nenhuma refeicao cadastrada</Title>}
+                ListEmptyComponent={() => <ListEmpty message='Nenhuma refeicao cadastrada!' />}
                 renderItem={({item}) => 
                     <>
-                        <Title>{item.date}</Title>
+                        <SnackGroupTitle title={item.date} />
                         <FlatList
                             data={item.snacks}
                             keyExtractor={(item) => item.id.toString()}
