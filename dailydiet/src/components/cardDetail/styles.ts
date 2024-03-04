@@ -7,7 +7,7 @@ export const Container = styled.TouchableOpacity`
     justify-content: center;
     align-items: center;
     border-radius: 20px;
-    margin: 24px;
+    margin: 24px 0px;
 `;
 
 export const Icon = styled(ArrowUpRight).attrs(({ theme }) => ({

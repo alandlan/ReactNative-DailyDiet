@@ -1,6 +1,6 @@
 import { Container, Divider, IsDiety, Name, Time } from "./styles";
 import {Snack} from "@models/snack";
-import {Text} from "react-native";
+import { ConvertFullDateToTimeString } from "@utils/convertDate";
 
 type SnackLineProps = {
     snack: Snack;
@@ -9,7 +9,7 @@ type SnackLineProps = {
 export default function SnackLine({snack}: SnackLineProps) {
     return (
         <Container>
-            <Time>{snack.time}</Time>
+            <Time>{ConvertFullDateToTimeString(snack.date)}</Time>
             <Divider />
             <Name>{snack.name}</Name>
             <IsDiety isDiety={snack.isDiety}>{snack.isDiety}</IsDiety>

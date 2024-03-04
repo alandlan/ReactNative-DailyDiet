@@ -3,7 +3,7 @@ import { styled } from "styled-components/native";
 export const Container = styled.TouchableOpacity`
     flex-direction: row;
     gap: 16px;
-    margin: 5px 24px;
+    margin: 5px 0px;
     padding: 16px;
     border: 1px solid ${({ theme }) => theme.COLORS.GRAY_4};
     border-radius: 8px;
