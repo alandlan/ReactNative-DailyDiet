@@ -1,20 +1,18 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { SnackGroup } from "@models/snackGroup";
-import { GetAllSnack } from "./getAllSnack";
+import { GetAll } from "./getAll";
 import { SNACK_COLLECTION } from "@data/data.config";
 import { Snack } from "@models/snack";
 import { OrderSnackByHour } from "@utils/orderSnackByHour";
 import { OrderSnackByDate } from "@utils/orderSnackByDate";
 
-export async function CreateSnack (newSnack: Snack){
+export async function Create (newSnack: Snack){
     try {
         
-        const data = await GetAllSnack() as SnackGroup[];
-
+        const data = await GetAll() as SnackGroup[];
 
         const dateAlreadyExists = data.filter((item) => item.date === newSnack.date);
-
 
         if(dateAlreadyExists.length > 0){
             const newData = data.map((item) => {
@@ -39,6 +37,6 @@ export async function CreateSnack (newSnack: Snack){
         }
 
     } catch (error) {
-        console.log(error);
+        console.log("Create"+error);
     }
 }

@@ -5,17 +5,13 @@ import CardDetail from '@components/cardDetail';
 import Header from '@components/header';
 import { Plus } from 'phosphor-react-native';
 import SnackLine from '@components/snackLine';
-import { Snack } from '@models/snack';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { useCallback, useState } from 'react';
 import { SnackGroup } from '@models/snackGroup';
-import { GetAllSnack } from '@data/snack/getAllSnack';
+import { GetAll } from '@data/snack/getAll';
 import { FlatList, SafeAreaView } from 'react-native';
-import { CreateSnack } from '@data/snack/createSnack';
-import uuid from 'react-native-uuid';
 import SnackGroupTitle from '@components/snackGroupTitle';
 import ListEmpty from '@components/listEmpyt';
-import { removeAllSnack } from '@data/snack/removeAllSnack';
 
 
 export function Home() {
@@ -25,24 +21,6 @@ export function Home() {
 
     const navigation = useNavigation();
 
-    async function AddSnack(){
-        try {
-            const date = new Date("2022-10-09T03:00");
-            //create fake snack 
-            const snack: Snack = {
-                id: uuid.v4(),
-                name: "Teste",
-                isDiety: false,
-                date: date,
-                description: "Teste"
-            }
-
-            await CreateSnack(snack);
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
     function handleAddSnack(){
         navigation.navigate('createSnack');
     }
@@ -50,17 +28,17 @@ export function Home() {
     async function fecthSnacks () {
         try {
             setIsLoaded(false);
-            const snacks = await GetAllSnack() as SnackGroup[];
+            const snacks = await GetAll() as SnackGroup[];
             setSnacks(snacks);
         } catch (error) {
-            console.log(error);
+            console.log("fecthSnacks: "+error);
         }finally {
             setIsLoaded(true);
         }
     }
 
     useFocusEffect(useCallback(() => {
-        removeAllSnack();
+        // removeAll();
         fecthSnacks();
     }, []));
 

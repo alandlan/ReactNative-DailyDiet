@@ -6,7 +6,18 @@ type ToogleProps = {
     isToggle: boolean;
 }
 
-export const Container = styled.TouchableOpacity.attrs<ToogleProps>(({isToggle,type}) => ({
+export const Container = styled.View`
+    margin-top: 12px;
+`;
+
+export const GroupButton = styled.View`
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5px;
+`;
+
+export const ToogleButton = styled.TouchableOpacity.attrs<ToogleProps>(({isToggle,type}) => ({
 }))`
     flex: 1;
     flex-direction: row;
@@ -14,7 +25,6 @@ export const Container = styled.TouchableOpacity.attrs<ToogleProps>(({isToggle,t
     align-items: center;
     padding: 10px;
     border-radius: 10px;
-    width: 100%;
     margin: 5px;
     text-align: center;
     height: 65px;

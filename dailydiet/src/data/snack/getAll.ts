@@ -3,7 +3,7 @@ import { SNACK_COLLECTION } from "../data.config";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { OrderSnackByDate } from "@utils/orderSnackByDate";
 
-export async function GetAllSnack(){
+export async function GetAll(){
     try {
         const data = await AsyncStorage.getItem(SNACK_COLLECTION);
 
@@ -13,6 +13,6 @@ export async function GetAllSnack(){
 
         return snacks;
     } catch (error) {
-        console.log(error);
+        console.log("GetAll"+error);
     }
 }

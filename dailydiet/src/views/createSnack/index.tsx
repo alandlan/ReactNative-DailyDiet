@@ -1,5 +1,5 @@
 import Navigation from "@components/navigation";
-import { Container, DateTimeGroup, Form } from "./styles";
+import { Container, Footer, Form, InputGroup } from "./styles";
 import { useNavigation } from '@react-navigation/native';
 import { InputText } from "@components/inputText";
 import { useEffect, useState } from "react";
@@ -9,13 +9,21 @@ import { ConvertDateToDateString, ConvertDateToTimeString } from "@utils/convert
 import InputDateTime from "@components/inputDateTime";
 import Button from "@components/button";
 import Toogle from "@components/inputToogle";
-import LabelInput from "@components/labelInput";
+import { ScrollView } from "react-native";
+import { Create } from "@data/snack/create";
+import uuid from 'react-native-uuid';
 
 export default function CreateSnack(oldSnack : Snack) {
-    const [snack, setSnack] = useState<Snack>({} as Snack);
-    const [datetime, setDatetime] = useState<Date>(new Date());
-    const [isDiety, setIsDiety] = useState<boolean>(true);
-    const [isNotDiety, setIsNotDiety] = useState<boolean>(false);
+
+    // const [snack, setSnack] = useState<Snack>({} as Snack);
+    const [name, setName] = useState<string>("");
+    const [description, setDescription] = useState<string>("");
+    const [date, setDate] = useState<string>("");
+    const [time, setTime] = useState<string>("");
+    const [isDiety, setIsDiety] = useState<boolean>(false);
+
+
+    const [datetime, setDatetime] = useState<Date>(undefined as any);
  
     const navigation = useNavigation();
 
@@ -23,48 +31,54 @@ export default function CreateSnack(oldSnack : Snack) {
         navigation.goBack();
     }
 
-    function handleChangeName(name: String){
-        const newSnack = { ...snack, name } as Snack;
-        setSnack(newSnack);
+    function handleChangeName(name: string){
+        setName(name);
     }
 
     function handleChangeDescription(description: string){
-        const newSnack = { ...snack, description };
-        setSnack(newSnack);
+        setDescription(description);
     }
 
     const handleChangeDate = (newValue: Date) => {
         
         const date = ConvertDateToDateString(newValue);
-        
-        const newSnack = { ...snack, date };
-        
-        setSnack(newSnack);
+        setDate(date);
         setDatetime(newValue);
     }
 
     const handleChangeTime = (newValue: any) => {
 
         var time = ConvertDateToTimeString(newValue);
-
-        console.log(time);
-
-        const newSnack = { ...snack, time };
-
-        setSnack(newSnack);
+        setTime(time);
         setDatetime(newValue);
     }
 
-    const handleChangeDiety = () => {
-        setIsDiety(isNotDiety);
-        setIsNotDiety(isDiety);
+    const handleChangeIsDiety = (isDiety: boolean) => {
+        setIsDiety(isDiety);
+    }
+
+    async function handleSaveSnack(){
+        try {
+
+            const snack: Snack = {
+                id: uuid.v4(),
+                name: name,
+                isDiety: isDiety,
+                date: date,
+                time: time,
+                description: description
+            }
+
+            await Create(snack);  
+
+            navigation.navigate("home");
+        } catch (error) {
+            console.log("handleSaveSnack: "+error);
+        }
     }
 
     useEffect(() => {
-        if(oldSnack){
-            setSnack(oldSnack);
-        }
-        console.log(datetime);
+        
     }, []);
 
     return (
@@ -72,18 +86,20 @@ export default function CreateSnack(oldSnack : Snack) {
 
             <Navigation title="Nova Refeicao" showBackButton={true} onBack={handleBack} />
 
+
             <Form>
-                <InputText title="Nome" value={snack.name} onChangeText={handleChangeName} />
+            <ScrollView contentContainerStyle={{flexGrow: 1}}>
+                <InputText title="Nome" value={name} onChangeText={handleChangeName} />
                 
                 <InputTextArea  title="Descrição" 
-                        value={snack.description}
+                        value={description}
                         multiline={true} 
                         numberOfLines={4}
                         style={{textAlignVertical:"top"}} 
                         onChangeText={handleChangeDescription}
                         />
 
-                <DateTimeGroup>
+                <InputGroup>
 
                     <InputDateTime 
                         title="Data" 
@@ -97,18 +113,21 @@ export default function CreateSnack(oldSnack : Snack) {
                         value={datetime}
                         onChangeText={handleChangeTime} />
    
-                </DateTimeGroup>
+                </InputGroup>
 
-                <LabelInput title="Está dentro da Dieta?" />
+                <Toogle onChange={(checked) => handleChangeIsDiety(checked)} />
 
-                <DateTimeGroup>
-                    <Toogle isToggle={isDiety} label="Sim" onChange={handleChangeDiety} />
-                    <Toogle isToggle={isNotDiety} label="Não" onChange={handleChangeDiety} />
-                </DateTimeGroup>
-
-                <Button TitleText="Cadastrar Refeicao" onPress={() => {}} />
+                <Footer>
+                    <Button TitleText="Cadastrar Refeicao" onPress={handleSaveSnack} />
+                </Footer>
                 
+            </ScrollView>
+
+            
             </Form>
+
+
+            
         </Container>
     );
 }

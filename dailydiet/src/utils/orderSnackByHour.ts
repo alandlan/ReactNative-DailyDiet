@@ -17,10 +17,6 @@ export const OrderSnackByHour = (snackList: Snack[]) => {
         var dateB = new Date(b.date+"T" + b.time + ":00");
         var t = dateA.getTime() - dateB.getTime();
 
-        console.log("a => "+dateA.getTime());
-        console.log("a => "+dateB.getTime());
-        console.log("a => "+t);
-
         return t;
     });
 

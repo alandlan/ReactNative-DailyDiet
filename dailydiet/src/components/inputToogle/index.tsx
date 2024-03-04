@@ -1,28 +1,57 @@
 import { useState } from "react";
-import { Container, Text } from "./styles";
+import { Container, GroupButton, Text,ToogleButton } from "./styles";
 import LabelInput from "@components/labelInput";
 
 
 type ToogleProps = {
-    label: "Sim" | "Não";
-    isToggle: boolean;
     onChange: (checked: boolean) => void;
 }
 
-export default function Toogle({isToggle,onChange,label} : ToogleProps) {
-    const [toggle, setToggle] = useState<boolean>(false);
+export default function Toogle({onChange} : ToogleProps) {
+    const [isDiety, setIsDiety] = useState<boolean>(false);
+    const [isDietyChecked, setIsDietyChecked] = useState<boolean>(false);
+    const [isNotDietyChecked, setIsNotDietyChecked] = useState<boolean>(false);
 
-    const handleToggle = () => {
+    const handleIsDietyToggle = () => {
+
+        if(isDietyChecked === isNotDietyChecked){
+            setIsDietyChecked(!isDietyChecked);
+        }else{
+            setIsDietyChecked(!isDietyChecked);
+            setIsNotDietyChecked(!isNotDietyChecked);
+        }
+
+        setIsDiety(isDietyChecked);
         
-        setToggle(!isToggle);
+        onChange(isDiety);
+    }
+
+    function handleIsNotDietyToggle(){
+        if(isDietyChecked === isNotDietyChecked){
+            setIsNotDietyChecked(!isNotDietyChecked);
+        }else{
+            setIsDietyChecked(!isDietyChecked);
+            setIsNotDietyChecked(!isNotDietyChecked);
+        }
         
-        onChange(toggle);
+        setIsDiety(isDietyChecked);
+        onChange(isDiety);
     }
 
     return (
-        <Container isToggle={isToggle} type={label} onPress={handleToggle}>
-            <Text>{label}</Text>
+        <Container>
+            <LabelInput title="Esta dentro da dieta?" />
+            <GroupButton>
+                <ToogleButton isToggle={isDietyChecked} type="Sim" onPress={handleIsDietyToggle}>
+                    <Text>Sim</Text>
+                </ToogleButton>
+
+                <ToogleButton isToggle={isNotDietyChecked} type="Não" onPress={handleIsNotDietyToggle}>
+                    <Text>Não</Text>
+                </ToogleButton>
+            </GroupButton>
+            
+
         </Container>
-        
     );
 }
