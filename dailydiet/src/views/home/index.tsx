@@ -9,9 +9,10 @@ import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { useCallback, useState } from 'react';
 import { SnackGroup } from '@models/snackGroup';
 import { GetAll } from '@data/snack/getAll';
-import { FlatList, SafeAreaView } from 'react-native';
+import { FlatList, SafeAreaView, View } from 'react-native';
 import SnackGroupTitle from '@components/snackGroupTitle';
 import ListEmpty from '@components/listEmpyt';
+import { removeAll } from '@data/snack/removeAll';
 
 
 export function Home() {
@@ -43,16 +44,15 @@ export function Home() {
     }, []));
 
     return (
-        <SafeAreaView>
             <Container>
                 <Header />
 
                 <CardDetail />
 
                 <Title>Refeicoes</Title>
-
+                
                 <Button TitleText="Nova Refeicao" IconComponent={Plus} onPress={handleAddSnack} />
-            
+
                 <FlatList
                     data={snacks}
                     keyExtractor={(item) => item.date}
@@ -69,6 +69,5 @@ export function Home() {
                     }
                 />
             </Container>
-        </SafeAreaView>
     );
 }

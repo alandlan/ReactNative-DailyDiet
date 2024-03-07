@@ -13,7 +13,7 @@ import { ScrollView } from "react-native";
 import { Create } from "@data/snack/create";
 import uuid from 'react-native-uuid';
 
-export default function CreateSnack(oldSnack : Snack) {
+export default function CreateSnack() {
 
     // const [snack, setSnack] = useState<Snack>({} as Snack);
     const [name, setName] = useState<string>("");
@@ -54,6 +54,7 @@ export default function CreateSnack(oldSnack : Snack) {
     }
 
     const handleChangeIsDiety = (isDiety: boolean) => {
+        
         setIsDiety(isDiety);
     }
 
@@ -69,9 +70,11 @@ export default function CreateSnack(oldSnack : Snack) {
                 description: description
             }
 
-            await Create(snack);  
+            console.log(isDiety);
 
-            navigation.navigate("home");
+            // await Create(snack);  
+
+            // navigation.navigate('finishedSnack', {isDiety});
         } catch (error) {
             console.log("handleSaveSnack: "+error);
         }
@@ -88,7 +91,7 @@ export default function CreateSnack(oldSnack : Snack) {
 
 
             <Form>
-            <ScrollView contentContainerStyle={{flexGrow: 1}}>
+            <ScrollView contentContainerStyle={{flexGrow: 1}} showsVerticalScrollIndicator={false}>
                 <InputText title="Nome" value={name} onChangeText={handleChangeName} />
                 
                 <InputTextArea  title="Descrição" 

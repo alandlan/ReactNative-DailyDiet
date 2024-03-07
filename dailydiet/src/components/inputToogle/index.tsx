@@ -8,7 +8,6 @@ type ToogleProps = {
 }
 
 export default function Toogle({onChange} : ToogleProps) {
-    const [isDiety, setIsDiety] = useState<boolean>(false);
     const [isDietyChecked, setIsDietyChecked] = useState<boolean>(false);
     const [isNotDietyChecked, setIsNotDietyChecked] = useState<boolean>(false);
 
@@ -20,10 +19,8 @@ export default function Toogle({onChange} : ToogleProps) {
             setIsDietyChecked(!isDietyChecked);
             setIsNotDietyChecked(!isNotDietyChecked);
         }
-
-        setIsDiety(isDietyChecked);
         
-        onChange(isDiety);
+        onChange(true);
     }
 
     function handleIsNotDietyToggle(){
@@ -33,9 +30,7 @@ export default function Toogle({onChange} : ToogleProps) {
             setIsDietyChecked(!isDietyChecked);
             setIsNotDietyChecked(!isNotDietyChecked);
         }
-        
-        setIsDiety(isDietyChecked);
-        onChange(isDiety);
+        onChange(false);
     }
 
     return (
