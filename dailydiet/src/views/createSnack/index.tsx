@@ -54,7 +54,7 @@ export default function CreateSnack() {
     }
 
     const handleChangeIsDiety = (isDiety: boolean) => {
-        
+
         setIsDiety(isDiety);
     }
 
@@ -70,11 +70,9 @@ export default function CreateSnack() {
                 description: description
             }
 
-            console.log(isDiety);
+            await Create(snack);  
 
-            // await Create(snack);  
-
-            // navigation.navigate('finishedSnack', {isDiety});
+            navigation.navigate('finishedSnack', {isDiety});
         } catch (error) {
             console.log("handleSaveSnack: "+error);
         }
@@ -88,7 +86,6 @@ export default function CreateSnack() {
         <Container>
 
             <Navigation title="Nova Refeicao" showBackButton={true} onBack={handleBack} />
-
 
             <Form>
             <ScrollView contentContainerStyle={{flexGrow: 1}} showsVerticalScrollIndicator={false}>

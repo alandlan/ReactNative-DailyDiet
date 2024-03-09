@@ -4,13 +4,12 @@ import styled from "styled-components/native";
 
 
 export const Contaner = styled.View`
-    /* width: 100%; */
-    height: 100px;
+    height: 75px;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     position: relative;
-    margin: 24px;
+    margin: 24px 24px 0px 24px;
 `;
 
 export const BackButton = styled.TouchableOpacity`

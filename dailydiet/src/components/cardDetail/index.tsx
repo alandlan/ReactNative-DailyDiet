@@ -1,9 +1,14 @@
 
 import { Container, Icon, Subtitle, Title } from "./styles";
 
-export default function CardDetail() {
+type CardDetailProps = {
+    onPress?: () => void;
+}
+
+export default function CardDetail({onPress}: CardDetailProps) {
+    
     return (
-        <Container>
+        <Container onPress={onPress}>
             <Icon />
 
             <Title>90,86%</Title>

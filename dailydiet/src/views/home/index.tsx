@@ -9,10 +9,9 @@ import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { useCallback, useState } from 'react';
 import { SnackGroup } from '@models/snackGroup';
 import { GetAll } from '@data/snack/getAll';
-import { FlatList, SafeAreaView, View } from 'react-native';
+import { FlatList } from 'react-native';
 import SnackGroupTitle from '@components/snackGroupTitle';
 import ListEmpty from '@components/listEmpyt';
-import { removeAll } from '@data/snack/removeAll';
 
 
 export function Home() {
@@ -24,6 +23,10 @@ export function Home() {
 
     function handleAddSnack(){
         navigation.navigate('createSnack');
+    }
+
+    function handleStatistics(){
+        navigation.navigate('statistics');
     }
 
     async function fecthSnacks () {
@@ -47,7 +50,7 @@ export function Home() {
             <Container>
                 <Header />
 
-                <CardDetail />
+                <CardDetail onPress={handleStatistics} />
 
                 <Title>Refeicoes</Title>
                 
