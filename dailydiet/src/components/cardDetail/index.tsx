@@ -2,16 +2,18 @@
 import { Container, Icon, Subtitle, Title } from "./styles";
 
 type CardDetailProps = {
+    inAveral?: boolean;
+    percentage: string;
     onPress?: () => void;
 }
 
-export default function CardDetail({onPress}: CardDetailProps) {
+export default function CardDetail({inAveral=true, percentage, onPress}: CardDetailProps) {
     
     return (
-        <Container onPress={onPress}>
-            <Icon />
+        <Container inAveral={inAveral} onPress={onPress}>
+            <Icon inAveral={inAveral} />
 
-            <Title>90,86%</Title>
+            <Title>{percentage}</Title>
 
             <Subtitle>das refeições foram entregues no prazo</Subtitle>
         </Container>

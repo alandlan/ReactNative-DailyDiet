@@ -1,3 +1,5 @@
 const SNACK_COLLECTION = "@daily-diet:snacks";
 
-export { SNACK_COLLECTION };
+const PERCENTAGE_SNACKS_IN_DIET = 50;
+
+export { SNACK_COLLECTION,PERCENTAGE_SNACKS_IN_DIET };

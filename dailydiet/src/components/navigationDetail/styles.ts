@@ -2,12 +2,16 @@ import theme from "@theme/index";
 import { ArrowLeft, CaretLeft } from "phosphor-react-native";
 import styled from "styled-components/native";
 
+type ContainerProps = {
+    inAveral: boolean;
+};
 
-export const Container = styled.View`
+export const Container = styled.View<ContainerProps>`
     width: 100%;
     flex-direction: column;
     margin-top: 24px;
     height: 170px;
+    background-color: ${({ theme,inAveral }) => inAveral ? theme.COLORS.GREEN_LIGHT : theme.COLORS.RED_LIGHT};
 `;
 
 export const ContainerIcon = styled.View`
@@ -18,10 +22,10 @@ export const ContainerIcon = styled.View`
     margin: 24px 24px 0px 24px;
 `;
 
-export const BackIcon = styled(ArrowLeft).attrs({
+export const BackIcon = styled(ArrowLeft).attrs<ContainerProps>(({ theme, inAveral }) => ({
     size: 32,
-    color: theme.COLORS.GRAY_1
-})``;
+    color: inAveral ? theme.COLORS.GREEN_DARK : theme.COLORS.RED_DARK,
+}))``;
 
 export const ContainerInfo = styled.View`
     justify-content: center;

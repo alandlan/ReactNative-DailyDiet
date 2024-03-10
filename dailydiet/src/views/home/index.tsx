@@ -12,12 +12,17 @@ import { GetAll } from '@data/snack/getAll';
 import { FlatList } from 'react-native';
 import SnackGroupTitle from '@components/snackGroupTitle';
 import ListEmpty from '@components/listEmpyt';
+import { GetSnacksIsDietOrNot } from '@utils/getStatistcs';
+import { PERCENTAGE_SNACKS_IN_DIET } from '@data/data.config';
+import { removeAll } from '@data/snack/removeAll';
 
 
 export function Home() {
 
     const [snacks, setSnacks] = useState<SnackGroup[]>([]);
     const [isLoaded, setIsLoaded] = useState(false);
+    const [snacksDietPercentage, setSnacksDietPercentage] = useState(0);
+    const [percentageSnacksInDiet,setPercentageSnacksInDiet] = useState(0);
 
     const navigation = useNavigation();
 
@@ -33,7 +38,17 @@ export function Home() {
         try {
             setIsLoaded(false);
             const snacks = await GetAll() as SnackGroup[];
+
+            if(!snacks || snacks.length === 0) return; 
+            
             setSnacks(snacks);
+
+            const snacksInDietTotal = await GetSnacksIsDietOrNot({isDiet: true, snacks});
+            const snacksOutDietTotal = await GetSnacksIsDietOrNot({isDiet: false, snacks});
+            const totalSnacks = snacksInDietTotal + snacksOutDietTotal;
+
+            setPercentageSnacksInDiet(Math.floor((snacksInDietTotal / (snacksInDietTotal + snacksOutDietTotal)) * 100));
+
         } catch (error) {
             console.log("fecthSnacks: "+error);
         }finally {
@@ -50,7 +65,7 @@ export function Home() {
             <Container>
                 <Header />
 
-                <CardDetail onPress={handleStatistics} />
+                <CardDetail inAveral={percentageSnacksInDiet > PERCENTAGE_SNACKS_IN_DIET ? true : false} percentage={`${percentageSnacksInDiet}%`} onPress={handleStatistics} />
 
                 <Title>Refeicoes</Title>
                 

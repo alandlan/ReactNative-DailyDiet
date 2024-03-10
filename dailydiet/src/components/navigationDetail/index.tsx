@@ -7,18 +7,19 @@ import { useNavigation } from "@react-navigation/native";
 type NavigationProps = {
     title: string;
     showBackButton?: boolean;
+    inAveral?: boolean;
     onBack?: () => void;
 }
 
-export default function NavigationDetail({title,showBackButton = true,onBack}: NavigationProps){
+export default function NavigationDetail({title,showBackButton = true,inAveral = true, onBack}: NavigationProps){
 
     return (
-        <Container>
+        <Container inAveral={inAveral}>
             {
                 showBackButton && 
                 <ContainerIcon>
                     <TouchableOpacity onPress={onBack}> 
-                        <BackIcon /> 
+                        <BackIcon inAveral={inAveral} /> 
                     </TouchableOpacity>
                 </ContainerIcon>
             }
