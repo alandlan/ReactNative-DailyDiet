@@ -88,46 +88,42 @@ export default function CreateSnack() {
             <Navigation title="Nova Refeicao" showBackButton={true} onBack={handleBack} />
 
             <Form>
-            <ScrollView contentContainerStyle={{flexGrow: 1}} showsVerticalScrollIndicator={false}>
-                <InputText title="Nome" value={name} onChangeText={handleChangeName} />
-                
-                <InputTextArea  title="Descrição" 
-                        value={description}
-                        multiline={true} 
-                        numberOfLines={4}
-                        style={{textAlignVertical:"top"}} 
-                        onChangeText={handleChangeDescription}
-                        />
+                <ScrollView contentContainerStyle={{flexGrow: 1}} showsVerticalScrollIndicator={false}>
+                    <InputText title="Nome" value={name} onChangeText={handleChangeName} />
+                    
+                    <InputTextArea  title="Descrição" 
+                            value={description}
+                            multiline={true} 
+                            numberOfLines={4}
+                            style={{textAlignVertical:"top"}} 
+                            onChangeText={handleChangeDescription}
+                            />
 
-                <InputGroup>
+                    <InputGroup>
 
-                    <InputDateTime 
-                        title="Data" 
-                        mode="date"
-                        value={datetime}
-                        onChangeText={handleChangeDate} />
+                        <InputDateTime 
+                            title="Data" 
+                            mode="date"
+                            value={datetime}
+                            onChangeText={handleChangeDate} />
 
-                    <InputDateTime 
-                        title="Hora" 
-                        mode="time"
-                        value={datetime}
-                        onChangeText={handleChangeTime} />
-   
-                </InputGroup>
+                        <InputDateTime 
+                            title="Hora" 
+                            mode="time"
+                            value={datetime}
+                            onChangeText={handleChangeTime} />
+    
+                    </InputGroup>
 
-                <Toogle onChange={(checked) => handleChangeIsDiety(checked)} />
+                    <Toogle onChange={(checked) => handleChangeIsDiety(checked)} />
 
-                <Footer>
-                    <Button TitleText="Cadastrar Refeicao" onPress={handleSaveSnack} />
-                </Footer>
-                
-            </ScrollView>
-
-            
+                    <Footer>
+                        <Button TitleText="Cadastrar Refeicao" onPress={handleSaveSnack} />
+                    </Footer>
+                    
+                </ScrollView>            
             </Form>
-
-
-            
+                        
         </Container>
     );
 }

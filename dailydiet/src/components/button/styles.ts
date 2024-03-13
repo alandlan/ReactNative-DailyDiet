@@ -1,7 +1,15 @@
 import { styled } from "styled-components/native";
 
-export const ButtonContainer = styled.TouchableOpacity`
-    background-color: ${({ theme }) => theme.COLORS.GRAY_1};
+type ContainerProps = {
+    hasBackground: boolean;
+}
+
+export const ButtonContainer = styled.TouchableOpacity<ContainerProps>`
+    ${({ hasBackground, theme }) => hasBackground ? `
+        background-color: ${theme.COLORS.GRAY_1};
+    ` : `
+        border: 1px solid ${theme.COLORS.GRAY_1};
+    `}
     padding: 16px;
     border-radius: 8px;
     flex-direction: row;
@@ -11,8 +19,12 @@ export const ButtonContainer = styled.TouchableOpacity`
     gap: 8px;
 `;
 
-export const Title = styled.Text`
+type TitleProps = {
+    hasBackground: boolean;
+}
+
+export const Title = styled.Text<TitleProps>`
     font-family: ${({ theme }) => theme.FONTS.BOLD};
     font-size: ${({ theme }) => theme.SIZES.LG}px;
-    color: ${({ theme }) => theme.COLORS.WHITE};
+    color: ${({ theme,hasBackground }) => hasBackground ? theme.COLORS.WHITE : theme.COLORS.GRAY_1};
 `;

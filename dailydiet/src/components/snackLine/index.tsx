@@ -4,11 +4,12 @@ import { ConvertDateToTimeString } from "@utils/convertDate";
 
 type SnackLineProps = {
     snack: Snack;
+    onPress?: () => void;
 }
 
-export default function SnackLine({snack}: SnackLineProps) {
+export default function SnackLine({snack, onPress}: SnackLineProps) {
     return (
-        <Container>
+        <Container onPress={onPress}>
             <Time>{snack.time}</Time>
             <Divider />
             <Name>{snack.name}</Name>

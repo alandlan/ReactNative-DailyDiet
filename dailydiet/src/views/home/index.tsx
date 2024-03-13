@@ -56,6 +56,10 @@ export function Home() {
         }
     }
 
+    function handleDetail(snackId: string | number[]) {
+        navigation.navigate('detailSnack', {snackId});
+    }
+
     useFocusEffect(useCallback(() => {
         // removeAll();
         fecthSnacks();
@@ -81,7 +85,7 @@ export function Home() {
                             <FlatList
                                 data={item.snacks}
                                 keyExtractor={(item) => item.id.toString()}
-                                renderItem={({item}) => <SnackLine snack={item} />}
+                                renderItem={({item}) => <SnackLine snack={item} onPress={() => handleDetail(item.id)} />}
                             />
                         </>
                     }
