@@ -1,13 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Container, GroupButton, Text,ToogleButton } from "./styles";
 import LabelInput from "@components/labelInput";
 
 
 type ToogleProps = {
     onChange: (checked: boolean) => void;
+    isNew?: boolean;
+    isDiety?: boolean;
 }
 
-export default function Toogle({onChange} : ToogleProps) {
+export default function Toogle({onChange,isNew = false, isDiety = false} : ToogleProps) {
     const [isDietyChecked, setIsDietyChecked] = useState<boolean>(false);
     const [isNotDietyChecked, setIsNotDietyChecked] = useState<boolean>(false);
 
@@ -32,6 +34,16 @@ export default function Toogle({onChange} : ToogleProps) {
         }
         onChange(false);
     }
+
+    useEffect(() => {
+        if(!isNew){
+            if(isDiety){
+                setIsDietyChecked(true);
+            }else{
+                setIsNotDietyChecked(true);
+            }
+        }
+    }, [isNew,isDiety]);
 
     return (
         <Container>

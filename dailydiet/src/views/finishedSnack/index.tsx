@@ -1,5 +1,5 @@
 
-import { Container, SubTitle, Title,Image,Footer } from "./styles";
+import { Container, SubTitle, Title,Image,Footer,Content } from "./styles";
 import Button from "@components/button";
 import { useNavigation, useRoute } from "@react-navigation/native";
 
@@ -21,27 +21,28 @@ export default function FinishedSnack() {
         navigation.navigate('home');
     }
 
-    console.log(isDiety);
-
     return (
         <Container>
-            {isDiety ? (
-                <>
-                    <Title isDiety={isDiety}>Continue assim!</Title>
-                    <SubTitle>Continue seguindo a dieta para alcançar seus objetivos.</SubTitle>
-                    <Image source={IconDiet} />
-                </>
-            ) : (
-                <>
-                    <Title isDiety={isDiety}>Que pena!</Title>
-                    <SubTitle>Voce saiu da dieta dessa vez, mas continue se esforcando e nao desista!</SubTitle>
-                    <Image source={IconNotDiet} />
+            <Content>
+                {isDiety ? (
+                    <>
+                        <Title isDiety={isDiety}>Continue assim!</Title>
+                        <SubTitle>Continue seguindo a dieta para alcançar seus objetivos.</SubTitle>
+                        <Image source={IconDiet} />
+                    </>
+                ) : (
+                    <>
+                        <Title isDiety={isDiety}>Que pena!</Title>
+                        <SubTitle>Voce saiu da dieta dessa vez, mas continue se esforcando e nao desista!</SubTitle>
+                        <Image source={IconNotDiet} />
 
-                </>
-            )}
-            <Footer>
-                <Button TitleText="Ir para a página inicial" onPress={handleGoToHome} />
-            </Footer>
+                    </>
+                )}
+                <Footer>
+                    <Button TitleText="Ir para a página inicial" onPress={handleGoToHome} />
+                </Footer>
+            </Content>
+            
         </Container>
     )
 }

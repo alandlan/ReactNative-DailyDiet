@@ -5,7 +5,15 @@ export const Container = styled.SafeAreaView`
     justify-content: center;
     align-items: center;
     background-color: ${({ theme }) => theme.COLORS.WHITE};
-    padding: 20px;
+`;
+
+export const Content = styled.View`
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 24px;
+
 `;
 
 type TitleProps = {
@@ -17,6 +25,7 @@ export const Title = styled.Text<TitleProps>`
     color: ${({ theme,isDiety }) => isDiety ? theme.COLORS.GREEN_DARK : theme.COLORS.RED_DARK };
     font-family: ${({ theme }) => theme.FONTS.BOLD};
     margin-top: 20px;
+
 `;
 
 export const Image = styled.Image`

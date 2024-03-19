@@ -61,7 +61,7 @@ export function Home() {
     }
 
     useFocusEffect(useCallback(() => {
-        // removeAll();
+        //removeAll();
         fecthSnacks();
     }, []));
 

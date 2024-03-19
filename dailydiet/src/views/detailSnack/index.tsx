@@ -30,6 +30,10 @@ export default function DetailSnack() {
         navigation.goBack();
     }
 
+    function handleEdit() {
+        navigation.navigate('createSnack', { snackId });
+    }
+
     useEffect(() => {
         loadSnack();
     }, []);
@@ -51,7 +55,7 @@ export default function DetailSnack() {
                 </ContainerTag>
                 
                 <Footer>
-                    <Button IconComponent={Newspaper} TitleText="Editar refeicao" onPress={() => {}} />
+                    <Button IconComponent={Newspaper} TitleText="Editar refeicao" onPress={handleEdit} />
                     <Button HasBackground={false} IconComponent={Trash}  TitleText="Excluir refeicao" onPress={() => {}} />
                 </Footer>
             </ContainerDetail>
