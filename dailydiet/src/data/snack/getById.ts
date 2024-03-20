@@ -2,8 +2,6 @@ import { SNACK_COLLECTION } from "@data/data.config";
 import { SnackGroup } from "@models/snackGroup";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-
-
 export async function GetById(id: string | number[]) {
     try {
         const data = await AsyncStorage.getItem(SNACK_COLLECTION);

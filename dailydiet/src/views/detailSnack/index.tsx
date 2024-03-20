@@ -7,6 +7,8 @@ import { Snack } from "@models/snack";
 import { FormatDate } from "@utils/formatDate";
 import Button from "@components/button";
 import { Newspaper, Trash } from "phosphor-react-native";
+import { deleteById } from "@data/snack/deleteById";
+import { Alert } from "react-native";
 
 type RouteParams = {
     snackId: string | number[];
@@ -34,6 +36,27 @@ export default function DetailSnack() {
         navigation.navigate('createSnack', { snackId });
     }
 
+    async function handleDelete() {
+        Alert.alert(
+            'Excluir refeicao',
+            'Deseja realmente excluir esta refeicao?',
+            [
+                {
+                    text: 'Cancelar',
+                    onPress: () => {},
+                    style: 'cancel'
+                },
+                {
+                    text: 'Excluir',
+                    onPress: async () => {
+                        await deleteById(snackId);
+                        navigation.goBack();
+                    }
+                }
+            ]
+        );
+    }
+
     useEffect(() => {
         loadSnack();
     }, []);
@@ -56,7 +79,7 @@ export default function DetailSnack() {
                 
                 <Footer>
                     <Button IconComponent={Newspaper} TitleText="Editar refeicao" onPress={handleEdit} />
-                    <Button HasBackground={false} IconComponent={Trash}  TitleText="Excluir refeicao" onPress={() => {}} />
+                    <Button HasBackground={false} IconComponent={Trash}  TitleText="Excluir refeicao" onPress={handleDelete} />
                 </Footer>
             </ContainerDetail>
         </Container>

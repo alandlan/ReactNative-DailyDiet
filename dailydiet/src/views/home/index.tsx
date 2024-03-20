@@ -14,7 +14,6 @@ import SnackGroupTitle from '@components/snackGroupTitle';
 import ListEmpty from '@components/listEmpyt';
 import { GetSnacksIsDietOrNot } from '@utils/getStatistcs';
 import { PERCENTAGE_SNACKS_IN_DIET } from '@data/data.config';
-import { removeAll } from '@data/snack/removeAll';
 
 
 export function Home() {
@@ -61,7 +60,6 @@ export function Home() {
     }
 
     useFocusEffect(useCallback(() => {
-        //removeAll();
         fecthSnacks();
     }, []));
 
